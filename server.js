@@ -14,14 +14,14 @@ app.get("/", (req, res) => {
   res.send("Heyy Doc!");
 });
 
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // app.use("/api/v1", listingRouter);
 // app.use("/api/v1/user", userRouter);
