@@ -27,6 +27,9 @@ module.exports = {
       isDoctor: {
         type: Sequelize.BOOLEAN
       },
+      doctorInfo: {
+        type: Sequelize.JSONB
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -15,19 +15,13 @@ const bookingController = require("../controllers/bookings/booking_controller");
 //http://localhost:8000/api/v1/user
 const router = express.Router();
 
-router.post(
-  "/register",
-  // validation(userValidators.register),
-  userController.register
-); // returns 201
+// router.post("/register", validation(userValidators.register), userController.register); // returns 201
 
-router.post(
-  "/login",
-  // validation(userValidators.login),
-  userController.login
-); // returns 201
+// router.post("/login", validation(userValidators.login), userController.login); // returns 201
 
-router.post("/logout", userController.logout); // returns 201
+// router.post("/logout", userController.logout); // returns 201
+
+// router.get("/profile", userController.showProfile); //returns {}
 
 //add authMiddleware is used for any route that needs authentication
 // router.get('/profile', authMiddleware, userController.showProfile)//returns {}
