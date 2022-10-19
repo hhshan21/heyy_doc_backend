@@ -17,10 +17,16 @@ const router = express.Router();
 
 router.post(
   "/register",
-  validation(userValidators.register),
+  // validation(userValidators.register),
   userController.register
 ); // returns 201
-router.post("/login", validation(userValidators.login), userController.login); // returns 201
+
+router.post(
+  "/login",
+  // validation(userValidators.login),
+  userController.login
+); // returns 201
+
 router.post("/logout", userController.logout); // returns 201
 
 //add authMiddleware is used for any route that needs authentication

@@ -1,5 +1,4 @@
 "use strict";
-
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
@@ -11,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.booking.belongsTo(models.user);
     }
   }
   user.init(
@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       drugAllergies: DataTypes.STRING,
       isDoctor: DataTypes.BOOLEAN,
-      doctorInfo: DataTypes.JSONB,
     },
     {
       sequelize,
