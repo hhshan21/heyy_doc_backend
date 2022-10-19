@@ -3,21 +3,15 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(
-      "bookings",
-      [
-        {
-          userId: 4,
-          bookingAt: new Date(),
-          startAt: "09:00",
-          endAt: "10:00",
-          symptoms: "fever",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {}
-    );
+    await queryInterface.bulkInsert("bookings", [
+      {
+        userId: 1,
+        bookingAt: DataTypes.DATE,
+        startAt: "09:00",
+        endAt: "10:00",
+        symptoms: "fever, headache",
+      },
+    ]);
     /**
      * Add seed commands here.
      *
@@ -30,7 +24,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("bookings", null, {});
     /**
      * Add commands to revert seed here.
      *
