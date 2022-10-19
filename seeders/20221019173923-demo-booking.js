@@ -6,10 +6,12 @@ module.exports = {
     await queryInterface.bulkInsert("bookings", [
       {
         userId: 1,
-        bookingAt: DataTypes.DATE,
+        bookingAt: "2022/10/22",
         startAt: "09:00",
         endAt: "10:00",
         symptoms: "fever, headache",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
     ]);
     /**
