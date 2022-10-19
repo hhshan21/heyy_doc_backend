@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-// const listingRouter = require("./routers/listing_routes");
-// const userRouter = require("./routers/user_routes");
+const doctorRouter = require("./routers/doctor_routes");
+const userRouter = require("./routers/user_routes");
 
 const app = express();
 
@@ -20,9 +20,15 @@ app.use(
   })
 );
 
-// app.use("/api/v1"); -> main pg
-// app.use("/api/v1/doctors", doctorRouter); -> show list of doctors
-// app.use("/api/v1/user", userRouter); -> make bookings with doctors, profile
+//  main pg
+app.use("/api/v1");
+
+// routes belonging to doctor
+app.use("/api/v1/doctors", doctorRouter);
+
+// routes belonging to user
+app.use("/api/v1/user", userRouter);
+
 // app.use("/api/v1/appointments", appointmentRouter); -> show appointment for doctors
 
 app.listen(process.env.PORT, async () => {
