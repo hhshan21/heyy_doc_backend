@@ -24,5 +24,12 @@ app.use(
 // app.use("/api/v1/user", userRouter);
 
 app.listen(process.env.PORT, async () => {
-  console.log(`Heyy Doc backend listening on port ${process.env.PORT}`);
+  try {
+    await console.log(
+      `Heyy Doc backend is listening on port ${process.env.PORT}`
+    );
+  } catch (err) {
+    console.log(`Failed to connect to DB`);
+    process.exit(1);
+  }
 });
