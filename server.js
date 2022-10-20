@@ -20,8 +20,8 @@ app.use(
   })
 );
 
-app.use("/api/v1/doctors", bookingRouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/doctors", bookingRouter);
 
 app.listen(process.env.PORT, async () => {
   try {
