@@ -21,6 +21,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      imageUrl: {
+        type: Sequelize.STRING
+      },
       drugAllergies: {
         type: Sequelize.STRING
       },

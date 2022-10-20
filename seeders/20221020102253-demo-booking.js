@@ -5,7 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("bookings", [
       {
-        userId: 1,
+        patientId: 1,
+        doctorId: 
         bookingAt: "2022/10/22",
         startAt: "09:00",
         endAt: "10:00",
@@ -26,6 +27,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("bookings", null, {});
     /**
      * Add commands to revert seed here.
      *

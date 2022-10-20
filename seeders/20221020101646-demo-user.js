@@ -7,8 +7,28 @@ module.exports = {
       {
         firstName: "A",
         lastName: "Patient",
-        email: "test@test.com",
+        email: "pa@pa.com",
         password: "123",
+        imageUrl:
+          "https://media.istockphoto.com/vectors/cute-shiba-inu-dog-with-sunglasses-drinking-bubble-tea-cartoon-vector-vector-id1285010832?k=20&m=1285010832&s=612x612&w=0&h=Hi_uGmr8nWtx7db-FF7ZeVKDMe20vDerDZbCJ-dDWWY=",
+        drugAllergies: "panadol",
+        isDoctor: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        doctorInfo: JSON.stringify({
+          professionalProfile: null,
+          language: null,
+          qualification: null,
+          location: null,
+        }),
+      },
+      {
+        firstName: "B",
+        lastName: "Patient",
+        email: "pb@pb.com",
+        password: "123",
+        imageUrl:
+          "https://media.istockphoto.com/vectors/cute-shiba-inu-dog-with-sunglasses-drinking-bubble-tea-cartoon-vector-vector-id1285010832?k=20&m=1285010832&s=612x612&w=0&h=Hi_uGmr8nWtx7db-FF7ZeVKDMe20vDerDZbCJ-dDWWY=",
         drugAllergies: "panadol",
         isDoctor: false,
         createdAt: new Date().toISOString(),
@@ -21,6 +41,7 @@ module.exports = {
         }),
       },
     ]);
+
     /**
      * Add seed commands here.
      *

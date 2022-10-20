@@ -7,8 +7,28 @@ module.exports = {
       {
         firstName: "A",
         lastName: "Doctor",
-        email: "doc@doc.com",
+        email: "doca@doca.com",
         password: "123",
+        imageUrl:
+          "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
+        drugAllergies: "panadol",
+        isDoctor: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        doctorInfo: JSON.stringify({
+          professionalProfile: "Dr Xxxxx.",
+          language: "English",
+          qualification: "MBBS",
+          location: "The helpful clinic. 123 helpful St #01-01",
+        }),
+      },
+      {
+        firstName: "B",
+        lastName: "Doctor",
+        email: "docb@docb.com",
+        password: "123",
+        imageUrl:
+          "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
         drugAllergies: "panadol",
         isDoctor: true,
         createdAt: new Date().toISOString(),
