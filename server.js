@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-// const bookingRouter = require("./routers/booking_routes");
-// const userRouter = require("./routers/user_routes");
+const bookingRouter = require("./routers/booking_routes");
+const userRouter = require("./routers/user_routes");
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.use(
   })
 );
 
-// app.use("/api/v1/doctors", bookingRouter);
-// app.use("/api/v1/user", userRouter);
+app.use("/api/v1/doctors", bookingRouter);
+app.use("/api/v1/user", userRouter);
 
 app.listen(process.env.PORT, async () => {
   try {

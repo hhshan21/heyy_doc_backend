@@ -1,6 +1,6 @@
 const express = require("express");
-const userController = require("../controllers/users/user_controller");
-const bookingController = require("../controllers/bookings/booking_controller");
+// const userController = require("../controllers/users/user_controller");
+// const bookingController = require("../controllers/bookings/booking_controller");
 // const listingController = require("../controllers/listings/listing_controller");
 // const validation = require("../middlewares/validation/validation");
 // const listingValidators = require("../middlewares/validation/validators/listingValidators");
@@ -14,6 +14,10 @@ const bookingController = require("../controllers/bookings/booking_controller");
 
 //http://localhost:8000/api/v1/user
 const router = express.Router();
+
+router.get("/register", (req, res) => {
+  return res.send("Heyy registered user!");
+});
 
 // router.post("/register", validation(userValidators.register), userController.register); // returns 201
 
@@ -41,3 +45,5 @@ const router = express.Router();
 // router.patch('/listing/:listing_id', authMiddleware, listingController.editListing)// returns 201
 // router.delete('/listing/:listing_id', authMiddleware, listingController.deleteListing)// return 201
 //  upload.array('file', 12),upload.single("file")validation(listingValidators.createListing)
+
+module.exports = router;
