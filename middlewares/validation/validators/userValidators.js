@@ -10,7 +10,7 @@ const userValidator = {
 
   register: yup.object({
     body: yup.object({
-      firstName: yup.string().min(3, "Mininum 4 characters").required(),
+      firstName: yup.string().min(3, "Mininum 3 characters").required(),
       lastName: yup.string().min(2, "Mininum 2 characters").required(),
       // gender: yup.string().required(),
       email: yup.string().email("Valid email is required").required(),
@@ -24,7 +24,7 @@ const userValidator = {
 
   editProfile: yup.object({
     body: yup.object({
-      firstName: yup.string().min(3, "Mininum 4 characters").required(),
+      firstName: yup.string().min(3, "Mininum 3 characters").required(),
       lastName: yup.string().min(2, "Mininum 2 characters").required(),
       // gender: yup.string().required(),
       email: yup.string().email("Valid email is required").required(),
