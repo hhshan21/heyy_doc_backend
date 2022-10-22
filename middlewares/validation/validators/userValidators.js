@@ -16,8 +16,6 @@ const userValidator = {
       password: yup.string().min(4, "Mininum 4 characters").required(),
       imageUrl: yup.string(),
       drugAllergies: yup.object(),
-      isDoctor: yup.boolean(),
-      doctorInfo: yup.object(),
     }),
   }),
 
@@ -29,8 +27,6 @@ const userValidator = {
       email: yup.string().email("Valid email is required").required(),
       imageUrl: yup.string(),
       drugAllergies: yup.object(),
-      isDoctor: yup.boolean(),
-      doctorInfo: yup.object(),
     }),
   }),
 };
