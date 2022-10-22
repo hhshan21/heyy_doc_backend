@@ -1,4 +1,4 @@
-const userModel = require("../../trash/user");
+const userModel = require("../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -53,8 +53,8 @@ const userController = {
     //secret is set in every server, so any server can check its authentication
     //change the schema obj to plain js object
     const userData = {
-      userId: user._id,
-      username: user.firstname,
+      userId: user.id,
+      email: user.email,
     };
 
     //gnerate the token, that will pass to FE, afte the login req then set in local with this token

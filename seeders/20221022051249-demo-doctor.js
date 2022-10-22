@@ -11,7 +11,6 @@ module.exports = {
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
-        drugAllergies: "[]",
         isDoctor: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -29,7 +28,7 @@ module.exports = {
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
-        drugAllergies: "[]",
+        drugAllergies: '["penicillin", "antibiotics"]',
         isDoctor: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -53,6 +52,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("users", null, {});
     /**
      * Add commands to revert seed here.
      *

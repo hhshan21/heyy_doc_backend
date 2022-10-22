@@ -1,9 +1,6 @@
 const express = require("express");
 const userController = require("../controllers/users/user_controller");
 // const bookingController = require("../controllers/bookings/booking_controller");
-const validation = require("../middlewares/validation/validation");
-// const listingValidators = require("../middlewares/validation/validators/listingValidators");
-const userValidators = require("../middlewares/validation/validators/userValidators");
 // const authMiddleware = require("../middlewares/authorization/authmiddleware");
 // const imageMethods = require("../middlewares/uploadImage/uploadImage");
 // const multer = require("multer");
@@ -14,14 +11,8 @@ const userValidators = require("../middlewares/validation/validators/userValidat
 //http://localhost:8000/api/v1/user
 const router = express.Router();
 
-router.post(
-  "/register",
-  validation(userValidators.register),
-  userController.register
-); // returns 201
-
-router.post("/login", userController.login);
-// router.post("/login", validation(userValidators.login), userController.login); // returns 201
+router.post("/register", userController.register); // returns 201
+router.post("/login", userController.login); // returns 201
 router.post("/logout", userController.logout); // returns 201
 
 //add authMiddleware is used for any route that needs authentication

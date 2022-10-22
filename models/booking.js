@@ -19,7 +19,14 @@ module.exports = (sequelize, DataTypes) => {
       bookingAt: DataTypes.DATEONLY,
       startAt: DataTypes.TIME,
       endAt: DataTypes.TIME,
-      symptoms: DataTypes.STRING,
+      symptoms: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: 3,
+          isAlpha: true,
+        },
+      },
     },
     {
       sequelize,

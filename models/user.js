@@ -13,18 +13,50 @@ module.exports = (sequelize, DataTypes) => {
   }
   user.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          len: 1,
+          isAlpha: true,
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          len: 2,
+          isAlpha: true,
+        },
+      },
       email: {
         type: DataTypes.STRING,
         validate: {
           isEmail: true,
         },
       },
-      password: DataTypes.STRING,
-      imageUrl: DataTypes.STRING,
-      drugAllergies: DataTypes.JSONB,
-      isDoctor: DataTypes.BOOLEAN,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          len: 4,
+        },
+      },
+      imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      drugAllergies: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+        validate: {
+          isAlpha: true,
+        },
+      },
+      isDoctor: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       doctorInfo: {
         type: DataTypes.JSONB,
         allowNull: true,
