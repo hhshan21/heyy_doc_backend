@@ -1,29 +1,21 @@
-const userModel = require("../../models/user");
+const db = require("../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const userController = {
   register: async (req, res) => {
     try {
-      const user = await userModel.findOne({ email: req.body.email });
-      if (user) {
-        return res.status(409).json({ error: "Email already exists" });
-      }
-    } catch (err) {
-      return res.status(500).json({ error: "failed to get user" });
-    }
-
-    const passHash = await bcrypt.hash(req.body.password, 10);
-
-    try {
-      await userModel.create({
+      const passHash = await bcrypt.hash(req.body.password, 10);
+      const user = await db.user.create({
         ...req.body,
         password: passHash,
       });
-      return res.status(201).json("New User Created");
+      res.json(user);
     } catch (err) {
-      console.log(err);
-      return res.status(500).json({ error: "failed to register user" });
+      console.log("err: ", err);
+      return res
+        .status(500)
+        .json({ error: "Email already exist! failed to register user" });
     }
   },
 
