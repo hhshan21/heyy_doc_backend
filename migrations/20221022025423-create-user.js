@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       drugAllergies: {
-        type: Sequelize.STRING
+        type: Sequelize.JSONB
       },
       isDoctor: {
         type: Sequelize.BOOLEAN
