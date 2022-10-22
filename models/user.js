@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       firstName: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
           len: 1,
           isAlpha: true,
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
           len: 2,
           isAlpha: true,
@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
         validate: {
           isEmail: true,
@@ -38,9 +39,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
-          len: 4,
+          len: {
+            args: 4,
+            msg: "Password must be more than 4 characters",
+          },
         },
       },
       imageUrl: {

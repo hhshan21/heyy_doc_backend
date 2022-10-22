@@ -4,18 +4,17 @@ const jwt = require("jsonwebtoken");
 
 const userController = {
   register: async (req, res) => {
+    console.log("req.body: ", req.body);
     try {
       const passHash = await bcrypt.hash(req.body.password, 10);
       const user = await db.user.create({
         ...req.body,
         password: passHash,
       });
-      res.json(user);
+      res.status(200).json({ message: "user is created", user });
     } catch (err) {
       console.log("err: ", err);
-      return res
-        .status(500)
-        .json({ error: "Email already exist! failed to register user" });
+      return res.status(500).json({ error: "Failed to register user" });
     }
   },
 
