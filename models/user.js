@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       password: DataTypes.STRING,
-      imageUrl: DataTypes.STRING,
-      drugAllergies: DataTypes.STRING,
+      drugAllergies: DataTypes.JSONB,
       isDoctor: DataTypes.BOOLEAN,
       doctorInfo: {
         type: DataTypes.JSONB,

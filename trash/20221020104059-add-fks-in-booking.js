@@ -27,7 +27,11 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.changeColumn("bookings", "userId", {
+    await queryInterface.changeColumn("bookings", "patientId", {
+      type: Sequelize.INTEGER,
+    });
+
+    await queryInterface.changeColumn("bookings", "doctorId", {
       type: Sequelize.INTEGER,
     });
     /**
