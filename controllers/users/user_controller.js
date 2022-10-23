@@ -21,7 +21,6 @@ const userController = {
   login: async (req, res) => {
     let errMsg = "User email or password is incorrect";
     let user = null;
-    console.log("req.body @ line 24: ", req.body);
 
     try {
       user = await db.user.findOne({
@@ -86,15 +85,18 @@ const userController = {
 
   showProfile: async (req, res) => {
     let user = null;
-    let userAuth = res.locals.userAuth.data.userId; //this is where the token is saved
-    console.log("----->", userAuth);
+    let userAuth = res.locals.userAuth; // this is where user is verified and authenticated
 
     try {
-      user = await userModel.findOne({ _id: userAuth }); //cos the userAuth email is in a data opbject, when signed token at login
+      user = await db.user.findOne({
+        where: {
+          email: userAuth.data.email,
+        },
+      }); //cos the userAuth email is in a data object when at login
       if (!user) {
         return res.status(404).json({ error: "user does not exsits" });
       }
-      console.log(user);
+      console.log("user: ", user);
       return res.json(user);
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });

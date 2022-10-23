@@ -8,12 +8,13 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    // now have the cookie, will verify the token to obtain the data.
-    const data = jwt.verify(token, process.env.JWT_SECRET);
-    req.userID = data.id;
+    // now have the cookie, will verify the token to obtain the verifiedData.
+    const verifiedData = jwt.verify(token, process.env.JWT_SECRET);
+    res.locals.userAuth = verifiedData;
+
     return next();
   } catch (err) {
-    return res.status(403).json("Invalid auth token");
+    return res.status(401).json("Invalid auth token");
   }
 };
 

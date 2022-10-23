@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true,
         },
       },
-      // PASSWORD LEN VALIDATION not working. TO consult
+      // PASSWORD LEN VALIDATION not working. TO DO consult
       password: {
         type: DataTypes.STRING,
         allowNull: false,
