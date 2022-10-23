@@ -4,27 +4,31 @@ const jwt = require("jsonwebtoken");
 
 const userController = {
   register: async (req, res) => {
-    console.log("req.body: ", req.body);
     try {
       const passHash = await bcrypt.hash(req.body.password, 10);
       const user = await db.user.create({
         ...req.body,
         password: passHash,
       });
-      res.status(200).json({ message: "user is created", user });
+      return res.status(201).json("New user is created");
     } catch (err) {
       console.log("err: ", err);
       return res.status(500).json({ error: "Failed to register user" });
     }
+    // TO DO the finding of 1 user and say email already exists
   },
 
   login: async (req, res) => {
     let errMsg = "User email or password is incorrect";
     let user = null;
-    console.log(req.body);
+    console.log("req.body @ line 24: ", req.body);
 
     try {
-      user = await userModel.findOne({ email: req.body.email });
+      user = await db.user.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
       if (!user) {
         return res.status(401).json({ error: errMsg });
       }
@@ -32,9 +36,12 @@ const userController = {
       return res.status(500).json({ error: "failed to get user" });
     }
 
-    const isPasswordOk = await bcrypt.compare(req.body.password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
 
-    if (!isPasswordOk) {
+    if (!isPasswordCorrect) {
       return res.status(401).json({ error: errMsg });
     }
 
@@ -43,6 +50,7 @@ const userController = {
     //we can be sure that the pay load is the original sender details, signature is used to verify that its is authentic
     //secret is set in every server, so any server can check its authentication
     //change the schema obj to plain js object
+
     const userData = {
       userId: user.id,
       email: user.email,
@@ -60,22 +68,20 @@ const userController = {
     //go try in the jwt.io past ein encoded to see wad you get backk
     //get from post man cos it will res.json there it will an {}, token : encryptions
 
-    return res.json({ token });
+    return res
+      .cookie("token", token, {
+        httpOnly: true,
+        // secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json({
+        message: "Logged in successfully",
+      });
   },
 
   logout: async (req, res) => {
-    //    let user = null;
-    //    let userAuth = res.locals.userAuth; //this is where the token is saved
-    //   try {
-    //     user = await userModel.find({_id: "631b7175a1827ff2c9860d90"})
-    //     if (!user) {
-    //       return res.status(404).json({ error: "user does not exsits" });
-    //     }
-    //     return res.status(200).json({ error: "Successfully logout" });
-    // } catch (error) {
-    //   res.status(500);
-    //   return res.json({ error: "failed to delete logout" });
-    // }
+    res.clearCookie("token");
+    res.status(200).json("Logout successful!");
   },
 
   showProfile: async (req, res) => {

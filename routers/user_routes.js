@@ -1,7 +1,7 @@
 const express = require("express");
 const userController = require("../controllers/users/user_controller");
 // const bookingController = require("../controllers/bookings/booking_controller");
-// const authMiddleware = require("../middlewares/authorization/authmiddleware");
+const authMiddleware = require("../middlewares/authmiddleware");
 // const imageMethods = require("../middlewares/uploadImage/uploadImage");
 // const multer = require("multer");
 // const storage = multer.memoryStorage()
@@ -16,10 +16,9 @@ router.post("/login", userController.login); // returns 201
 router.post("/logout", userController.logout); // returns 201
 
 //add authMiddleware is used for any route that needs authentication
-router.get("/profile", userController.showProfile); //returns {}
+router.get("/profile", authMiddleware, userController.showProfile); //returns {}
 // router.get('/profile', authMiddleware, userController.showProfile)//returns {}
 // router.patch('/profile', authMiddleware, userController.editProfile)// returns 201
-// router.delete('/profile', authMiddleware, userController.deleteProfile)// returns 201
 
 // router.get('/trips', authMiddleware, bookingController.showTrips)//returns []
 // router.get('/trip/:booking_id', authMiddleware, bookingController.showTrip)//returns []
