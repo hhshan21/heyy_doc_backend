@@ -37,14 +37,12 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true,
         },
       },
+      // PASSWORD LEN VALIDATION not working. TO consult
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: {
-            args: 4,
-            msg: "Password must be more than 4 characters",
-          },
+          len: 4,
         },
       },
       imageUrl: {
