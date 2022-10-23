@@ -16,9 +16,18 @@ module.exports = (sequelize, DataTypes) => {
     {
       patientId: DataTypes.INTEGER,
       doctorId: DataTypes.INTEGER,
-      bookingAt: DataTypes.DATEONLY,
-      startAt: DataTypes.TIME,
-      endAt: DataTypes.TIME,
+      bookingAt: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      startAt: {
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
+      endAt: {
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
       symptoms: {
         type: DataTypes.STRING,
         allowNull: false,
