@@ -17,7 +17,7 @@ router.post("/logout", userController.logout); // returns 201
 
 //add authMiddleware is used for any route that needs authentication
 router.get("/profile", authMiddleware, userController.showProfile); //returns {}
-// router.patch("/profile", authMiddleware, userController.editProfile); // returns 201
+router.patch("/profile", authMiddleware, userController.editProfile); // returns 201
 
 // router.get('/trips', authMiddleware, bookingController.showTrips)//returns []
 // router.get('/trip/:booking_id', authMiddleware, bookingController.showTrip)//returns []

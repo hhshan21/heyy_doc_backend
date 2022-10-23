@@ -85,48 +85,52 @@ const userController = {
 
   showProfile: async (req, res) => {
     let user = null;
-    let userAuth = res.locals.userAuth; // this is where user is verified and authenticated
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
+
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
 
     try {
       user = await db.user.findOne({
         where: {
           email: userAuth.data.email,
         },
-      }); //cos the userAuth email is in a data object when at login
+      }); //cos the userAuth email is in an object when at login
       if (!user) {
         return res.status(404).json({ error: "user does not exsits" });
       }
-      console.log("user: ", user);
-      return res.json(user);
+      console.log("user.get(): ", user.get());
+      return res.json(user.get());
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
     }
   },
 
-  // editProfile: async (req, res) => {
-  //   let user = null;
-  //   let userAuth = res.locals.userAuth.data.userId; //this is where the token is saved
+  editProfile: async (req, res) => {
+    let user = null;
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
 
-  //   //this is redundant, security, defence indepth
-  //   if (!userAuth) {
-  //     console.log(userAuth);
-  //     return res.status(401).json();
-  //   }
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
 
-  //   try {
-  //     user = await userModel.findOneAndUpdate(
-  //       { _id: userAuth },
-  //       { $set: { ...req.body } },
-  //       { new: true }
-  //     );
-  //     if (!user) {
-  //       return res.status(404).json({ error: "User does not exists" });
-  //     }
-  //     return res.status(200).json("Profile edited");
-  //   } catch (err) {
-  //     return res.status(500).json({ error: "failed to get user" });
-  //   }
-  // },
+    try {
+      await db.user.update(
+        { ...req.body },
+        {
+          where: {
+            email: userAuth.data.email,
+          },
+        }
+      );
+      return res.status(200).json("Profile edited");
+    } catch (err) {
+      return res.status(500).json({ error: "failed to get user" });
+    }
+  },
 };
 
 module.exports = userController;
