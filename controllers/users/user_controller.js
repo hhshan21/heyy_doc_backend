@@ -6,11 +6,17 @@ const userController = {
   register: async (req, res) => {
     try {
       const passHash = await bcrypt.hash(req.body.password, 10);
-      const user = await db.user.create({
-        ...req.body,
-        password: passHash,
+      const [user, created] = await db.user.findOrCreate({
+        where: {
+          email: req.body.email,
+        },
+        defaults: { ...req.body, password: passHash },
       });
-      return res.status(201).json("New user is created");
+      if (created) {
+        return res.status(201).json("New user is created");
+      } else {
+        return res.status(201).json("Email already exists");
+      }
     } catch (err) {
       console.log("err: ", err);
       return res.status(500).json({ error: "Failed to register user" });
