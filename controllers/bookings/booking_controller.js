@@ -2,6 +2,7 @@ const db = require("../../models");
 
 const bookingController = {
   showBooking: async (req, res) => {
+    // TO FIX THIS ROUTE
     let bookings = null;
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
@@ -32,40 +33,30 @@ const bookingController = {
   },
 
   createBooking: async (req, res) => {
-    //const listingId = "6316fda9d2571d6d3e58aef6"
-    const listingId = req.params.listing_id; //take from FE link\
-    console.log(listingId);
-    const booked_by = res.locals.userAuth.data.userId;
-    //const booked_by = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
-    let booking = null;
-    let listing = null;
-    const dateRangeArray = dateMethods.getDatesInRange(
-      req.body.checkin_date,
-      req.body.checkout_date
-    );
-    console.log("----->", dateRangeArray);
+    const bookingId = "1";
+    // const bookingId = req.params.booking_id; //take from FE link
+    const userId = res.locals.userAuth.data.userId;
 
-    //mongoose will change string date to the iso date in dbs
+    let booking = null;
+    let doctor = null;
+
     try {
-      booking = await bookingModel.create({
-        ...req.body,
-        listing: listingId,
-        booked_by,
+      const [booking, created] = await db.booking.findOrCreate({
+        where: {
+          userId,
+          bookingId,
+        },
+        defaults: {
+          ...req.body,
+        },
       });
-      if (!booking) {
-        return res.status(404).json({ error: "Booking not found " });
+      if (created) {
+        return res.status(201).json("Booking Created Successfully");
+      } else {
+        return res.status(201).json("Booking already exists");
       }
-      listing = await listingModel.findOneAndUpdate(
-        { _id: listingId },
-        { $push: { unavailable_dates: dateRangeArray } },
-        { new: true }
-      );
-      if (!listing) {
-        return res.status(404).send("Unable to find listing");
-      }
-      return res.status(201).send("Booking Created Successfully");
-    } catch (error) {
-      return res.status(500).json({ error: "failed to create booking" });
+    } catch (err) {
+      return res.status(500).json({ err: "failed to create booking" });
     }
   },
 
