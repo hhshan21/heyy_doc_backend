@@ -104,7 +104,7 @@ const userController = {
         },
       }); //cos the userAuth email is in an object when at login
       if (!user) {
-        return res.status(404).json({ error: "user does not exsits" });
+        return res.status(404).json({ error: "user not found" });
       }
       console.log("user.get(): ", user.get());
       return res.json(user.get());
