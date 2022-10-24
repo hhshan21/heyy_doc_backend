@@ -5,9 +5,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("users", [
       {
-        firstName: "A",
+        firstName: "C",
         lastName: "Doctor",
-        email: "da@da.com",
+        email: "dc@dc.com",
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
@@ -15,16 +15,16 @@ module.exports = {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         doctorInfo: JSON.stringify({
-          professionalProfile: "Dr A.",
+          professionalProfile: "Dr C. sdfsdf",
           language: "English",
           qualification: "MBBS",
           location: "The helpful clinic. 123 helpful St #01-01",
         }),
       },
       {
-        firstName: "B",
+        firstName: "D",
         lastName: "Doctor",
-        email: "db@db.com",
+        email: "dd@dd.com",
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
@@ -33,7 +33,7 @@ module.exports = {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         doctorInfo: JSON.stringify({
-          professionalProfile: "Dr B.",
+          professionalProfile: "Dr D. sdfsdfsdfsd",
           language: "English",
           qualification: "MBBS",
           location: "The helpful clinic. 123 helpful St #01-01",
