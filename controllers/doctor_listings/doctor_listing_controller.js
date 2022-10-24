@@ -5,7 +5,7 @@ const doctorListingController = {
     let doctors = null;
 
     try {
-      console.log("heyy doc!");
+      // TO DO explore a search function of doctors
       doctors = await db.user.findAll({
         where: {
           isDoctor: true,
@@ -13,7 +13,7 @@ const doctorListingController = {
       });
       if (doctors.length === 0) {
         //find returns array
-        return res.status(404).json({ error: "no doctors results" });
+        return res.status(404).json({ error: "there are no doctors listed!" });
       }
       return res.json(doctors);
     } catch (err) {
