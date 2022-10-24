@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const bookingRouter = require("./routers/booking_routes");
+const doctorRouter = require("./routers/doctorListing_routes");
 const userRouter = require("./routers/user_routes");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -22,7 +22,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/doctors", bookingRouter);
+app.use("/api/v1/doctors", doctorRouter);
 
 app.listen(process.env.PORT, async () => {
   try {

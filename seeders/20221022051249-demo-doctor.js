@@ -7,7 +7,7 @@ module.exports = {
       {
         firstName: "A",
         lastName: "Doctor",
-        email: "doca@doca.com",
+        email: "da@da.com",
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
@@ -15,7 +15,7 @@ module.exports = {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         doctorInfo: JSON.stringify({
-          professionalProfile: "Dr Xxxxx.",
+          professionalProfile: "Dr A.",
           language: "English",
           qualification: "MBBS",
           location: "The helpful clinic. 123 helpful St #01-01",
@@ -24,7 +24,7 @@ module.exports = {
       {
         firstName: "B",
         lastName: "Doctor",
-        email: "docb@docb.com",
+        email: "db@db.com",
         password: "123",
         imageUrl:
           "https://static.vecteezy.com/system/resources/previews/006/606/754/original/cute-doctor-healthcare-and-medical-concept-cartoon-character-hand-draw-art-illustration-vector.jpg",
@@ -33,7 +33,7 @@ module.exports = {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         doctorInfo: JSON.stringify({
-          professionalProfile: "Dr Xxxxx.",
+          professionalProfile: "Dr B.",
           language: "English",
           qualification: "MBBS",
           location: "The helpful clinic. 123 helpful St #01-01",

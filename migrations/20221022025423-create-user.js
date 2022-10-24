@@ -48,7 +48,12 @@ module.exports = {
         type: Sequelize.JSONB,
         allowNull: true,
         validate: {
-          isAlpha: true,
+          is: {
+            args: /^[A-Za-z,]/i,
+          },
+          // is: {
+          //   args: /^[a-z]+$/i,
+          // },
         },
       },
       isDoctor: {
