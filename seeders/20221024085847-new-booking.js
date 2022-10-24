@@ -6,18 +6,8 @@ module.exports = {
     await queryInterface.bulkInsert("bookings", [
       {
         patientId: 10,
-        doctorId: 12,
-        bookingAt: "2022/10/24",
-        startAt: "09:00",
-        endAt: "10:00",
-        symptoms: "fever, headache",
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        patientId: 11,
         doctorId: 13,
-        bookingAt: "2022/10/24",
+        bookingAt: "2022/10/26",
         startAt: "09:00",
         endAt: "10:00",
         symptoms: "fever, headache",
@@ -25,6 +15,7 @@ module.exports = {
         updatedAt: new Date().toISOString(),
       },
     ]);
+
     /**
      * Add seed commands here.
      *
