@@ -21,7 +21,6 @@ const userController = {
       console.log("err: ", err);
       return res.status(500).json({ error: "Failed to register user" });
     }
-    // TO DO the finding of 1 user and say email already exists
   },
 
   login: async (req, res) => {

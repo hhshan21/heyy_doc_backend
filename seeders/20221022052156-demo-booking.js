@@ -5,9 +5,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("bookings", [
       {
-        patientId: 1,
-        doctorId: 3,
-        bookingAt: "2022/10/22",
+        patientId: 10,
+        doctorId: 12,
+        bookingAt: "2022/10/24",
         startAt: "09:00",
         endAt: "10:00",
         symptoms: "fever, headache",
@@ -15,9 +15,9 @@ module.exports = {
         updatedAt: new Date().toISOString(),
       },
       {
-        patientId: 2,
-        doctorId: 4,
-        bookingAt: "2022/10/23",
+        patientId: 11,
+        doctorId: 13,
+        bookingAt: "2022/10/24",
         startAt: "09:00",
         endAt: "10:00",
         symptoms: "fever, headache",
