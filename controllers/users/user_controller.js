@@ -21,7 +21,6 @@ const userController = {
       console.log("err: ", err);
       return res.status(500).json({ error: "Failed to register user" });
     }
-    // TO DO the finding of 1 user and say email already exists
   },
 
   login: async (req, res) => {
@@ -105,7 +104,7 @@ const userController = {
         },
       }); //cos the userAuth email is in an object when at login
       if (!user) {
-        return res.status(404).json({ error: "user does not exsits" });
+        return res.status(404).json({ error: "user not found" });
       }
       console.log("user.get(): ", user.get());
       return res.json(user.get());

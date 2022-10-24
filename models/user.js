@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.booking.belongsTo(models.user);
     }
   }
   user.init(
@@ -37,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true,
         },
       },
-      // PASSWORD LEN VALIDATION not working. TO DO consult
       password: {
         type: DataTypes.STRING,
         allowNull: false,

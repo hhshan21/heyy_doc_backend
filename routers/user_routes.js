@@ -1,6 +1,6 @@
 const express = require("express");
 const userController = require("../controllers/users/user_controller");
-// const bookingController = require("../controllers/bookings/booking_controller");
+const bookingController = require("../controllers/bookings/booking_controller");
 const authMiddleware = require("../middlewares/authmiddleware");
 // const imageMethods = require("../middlewares/uploadImage/uploadImage");
 // const multer = require("multer");
@@ -15,17 +15,16 @@ router.post("/register", userController.register); // returns 201
 router.post("/login", userController.login); // returns 201
 router.post("/logout", userController.logout); // returns 201
 
-//add authMiddleware is used for any route that needs authentication
-// get and edit profile
+// add authMiddleware is used for any route that needs authentication
+// get and edit user's profile
 router.get("/profile", authMiddleware, userController.showProfile); //returns {}
 router.patch("/profile", authMiddleware, userController.editProfile); // returns 201
 
-//get,create, edit, delete each booking
-// router.get('/trips', authMiddleware, bookingController.showTrips)//returns []
-// router.get('/trip/:booking_id', authMiddleware, bookingController.showTrip)//returns []
-// router.post('/book/:listing_id', authMiddleware, bookingController.bookTrip)// returns 201
-// router.patch('/trip/:booking_id', authMiddleware, bookingController.editTrip)// returns 201
-// router.delete('/trip/:booking_id', authMiddleware, bookingController.deleteTrip)// returns 201
+// get,create, edit, delete each booking
+router.get("/bookings", authMiddleware, bookingController.showBooking); //returns []
+router.post("/bookings/:id", authMiddleware, bookingController.createBooking); // returns 201
+router.patch("/bookings/:id", authMiddleware, bookingController.editBooking); // returns 201
+router.delete("/bookings/:id", authMiddleware, bookingController.deleteBooking); // returns 201
 
 //get,create, edit, delete each listing
 // router.get('/listings', authMiddleware, listingController.listHostListings)//returns []
