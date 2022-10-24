@@ -16,14 +16,16 @@ router.post("/login", userController.login); // returns 201
 router.post("/logout", userController.logout); // returns 201
 
 //add authMiddleware is used for any route that needs authentication
+// get and edit profile
 router.get("/profile", authMiddleware, userController.showProfile); //returns {}
 router.patch("/profile", authMiddleware, userController.editProfile); // returns 201
 
+//get,create, edit, delete each booking
 // router.get('/trips', authMiddleware, bookingController.showTrips)//returns []
 // router.get('/trip/:booking_id', authMiddleware, bookingController.showTrip)//returns []
+// router.post('/book/:listing_id', authMiddleware, bookingController.bookTrip)// returns 201
 // router.patch('/trip/:booking_id', authMiddleware, bookingController.editTrip)// returns 201
 // router.delete('/trip/:booking_id', authMiddleware, bookingController.deleteTrip)// returns 201
-// router.post('/book/:listing_id', authMiddleware, bookingController.bookTrip)// returns 201
 
 //get,create, edit, delete each listing
 // router.get('/listings', authMiddleware, listingController.listHostListings)//returns []
