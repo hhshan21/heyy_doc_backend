@@ -38,7 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: 3,
-          isAlpha: true,
+          is: {
+            args: /^[A-Za-z,]/i,
+          },
         },
       },
     },

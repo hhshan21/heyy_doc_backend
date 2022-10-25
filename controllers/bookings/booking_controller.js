@@ -2,12 +2,9 @@ const db = require("../../models");
 
 const bookingController = {
   showBooking: async (req, res) => {
-    // TO FIX THIS ROUTE
     let bookings = null;
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
-    console.log("userAuth: ", userAuth);
-    console.log("userAuth.data.userId: ", userAuth.data.userId);
     //this is redundant, security, defence indepth
     if (!userAuth) {
       return res.status(401).json();
@@ -24,24 +21,23 @@ const bookingController = {
       if (!bookings) {
         return res.status(404).json({ error: "bookings not found" });
       }
-      console.log("bookings: ", bookings);
+
       return res.json(bookings);
     } catch (err) {
-      // return res.status(500).json({ error: "failed to get booking" });
-      return res.status(500).json({ err });
+      return res.status(500).json({ error: "failed to get booking" });
     }
   },
 
   createBooking: async (req, res) => {
-    const bookingId = "1";
-    // const bookingId = req.params.booking_id; //take from FE link
-    const userId = res.locals.userAuth.data.userId;
-
     try {
+      const { patientId, doctorId, bookingAt, startAt, endAt } = req.body;
       const [booking, created] = await db.booking.findOrCreate({
         where: {
-          userId,
-          bookingId,
+          patientId,
+          doctorId,
+          bookingAt,
+          startAt,
+          endAt,
         },
         defaults: {
           ...req.body,
@@ -53,11 +49,13 @@ const bookingController = {
         return res.status(201).json("Booking already exists");
       }
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json({ err: "Failed to create new booking" });
     }
   },
 
   editBooking: async (req, res) => {
+    const bookingId = "1";
+    // const bookingId = req.params.booking_id; //take from FE link
     let user = null;
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
@@ -71,7 +69,7 @@ const bookingController = {
         { ...req.body },
         {
           where: {
-            patientId: userAuth.data.userId,
+            id: bookingId,
           },
         }
       );
