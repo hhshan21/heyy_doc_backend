@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-app.get("/api/v1", (req, res) => {
+app.get("/api/v1/", (req, res) => {
   res.send("Heyy Doc!");
 });
 

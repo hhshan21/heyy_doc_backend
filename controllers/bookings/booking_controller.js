@@ -15,7 +15,7 @@ const bookingController = {
 
     try {
       // search for all bookings based on user's id
-      bookings = await db.booking.findOne({
+      bookings = await db.booking.findAll({
         include: { model: db.user },
         where: {
           patientId: userAuth.data.userId,
@@ -37,9 +37,6 @@ const bookingController = {
     // const bookingId = req.params.booking_id; //take from FE link
     const userId = res.locals.userAuth.data.userId;
 
-    let booking = null;
-    let doctor = null;
-
     try {
       const [booking, created] = await db.booking.findOrCreate({
         where: {
@@ -56,7 +53,7 @@ const bookingController = {
         return res.status(201).json("Booking already exists");
       }
     } catch (err) {
-      return res.status(500).json({ err: "failed to create booking" });
+      return res.status(500).json(err);
     }
   },
 
@@ -74,20 +71,27 @@ const bookingController = {
         { ...req.body },
         {
           where: {
-            email: userAuth.data.email,
+            patientId: userAuth.data.userId,
           },
         }
       );
-      return res.status(200).json("Profile edited");
+      return res.status(200).json("Booking edited");
     } catch (err) {
-      return res.status(500).json({ error: "failed to get user" });
+      return res.status(500).json(err);
     }
   },
 
   deleteBooking: async (req, res) => {
-    const bookingId = req.params.booking_id; //taken from FE <link>
+    const bookingId = "1";
+    // const bookingId = req.params.booking_id; //take from FE link
     let booking = null;
     let listing = null;
+
+    // const favourite = await db.favorite.destroy({
+    //   where: {
+    //     author: 'Brian'
+    //   }
+    // });
 
     try {
       booking = await bookingModel.findById(bookingId).populate("listing");
