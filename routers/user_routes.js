@@ -23,16 +23,8 @@ router.patch("/profile", authMiddleware, userController.editProfile); // returns
 // get,create, edit, delete each booking (patient view)
 router.get("/bookings", authMiddleware, bookingController.showBooking); //returns []
 router.post("/bookings", authMiddleware, bookingController.createBooking); // returns 201
-router.patch(
-  "/bookings/:booking_id",
-  authMiddleware,
-  bookingController.editBooking
-); // returns 201
-router.delete(
-  "/bookings/:booking_id",
-  authMiddleware,
-  bookingController.deleteBooking
-); // returns 201
+router.patch("/bookings/:id", authMiddleware, bookingController.editBooking); // returns 201
+router.delete("/bookings/:id", authMiddleware, bookingController.deleteBooking); // returns 201
 
 //get,create, edit, delete each appointment (doctor only)
 // router.get('/appointments', authMiddleware, bookingController.listDoctorAppointments)//returns []
