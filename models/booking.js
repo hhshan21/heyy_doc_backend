@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.booking.belongsTo(models.user);
+      models.booking.belongsTo(models.user, {
+        foreignKey: "patientId",
+      });
+      models.booking.belongsTo(models.user, {
+        foreignKey: "doctorId",
+      });
     }
   }
   booking.init(
@@ -33,7 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: 3,
-          isAlpha: true,
+          is: {
+            args: /^[A-Za-z,]/i,
+          },
         },
       },
     },
