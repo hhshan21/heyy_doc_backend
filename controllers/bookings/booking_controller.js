@@ -54,15 +54,15 @@ const bookingController = {
   },
 
   editBooking: async (req, res) => {
-    const bookingId = "1";
-    // const bookingId = req.params.booking_id; //take from FE link
-    let user = null;
+    // TO FIX THIS ROUTE
+    const bookingId = req.params.id; //take from FE link
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
     //this is redundant, security, defence indepth
     if (!userAuth) {
       return res.status(401).json();
     }
+    console.log("bookingId: ", bookingId);
 
     try {
       await db.user.update(
@@ -73,6 +73,7 @@ const bookingController = {
           },
         }
       );
+
       return res.status(200).json("Booking edited");
     } catch (err) {
       return res.status(500).json(err);
@@ -80,44 +81,80 @@ const bookingController = {
   },
 
   deleteBooking: async (req, res) => {
-    const bookingId = "1";
-    // const bookingId = req.params.booking_id; //take from FE link
-    let booking = null;
-    let listing = null;
+    const bookingId = req.params.id; //take from FE link
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
 
-    // const favourite = await db.favorite.destroy({
-    //   where: {
-    //     author: 'Brian'
-    //   }
-    // });
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
 
     try {
-      booking = await bookingModel.findById(bookingId).populate("listing");
-      if (!booking) {
-        return res.status(404).json({ error: "Booking not found " });
-      }
-
-      let idx = booking.listing.unavailable_dates.findIndex((element) => {
-        return element[0].toString() == booking.checkin_date.toString();
-      });
-
-      listing = await listingModel.findByIdAndUpdate(
-        { _id: booking.listing._id },
-        {
-          $pull: { unavailable_dates: booking.listing.unavailable_dates[idx] },
+      const booking = await db.booking.destroy({
+        where: {
+          id: bookingId,
         },
-        { new: true }
-      );
-      if (!listing) {
-        return res.status(404).json({ error: "Listing not found " });
-      }
-      console.log("------->", listing);
-
-      await bookingModel.findByIdAndDelete(bookingId);
-
+      });
       return res.status(201).json("booking deleted Successfully");
-    } catch (error) {
+    } catch (err) {
       return res.status(500).json({ error: "failed to delete booking" });
+    }
+  },
+
+  showAppointments: async (req, res) => {
+    // TO FIX THIS ROUTE to show patient info
+    let appointments = null;
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
+
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
+
+    console.log("userAuth: ", userAuth);
+
+    try {
+      // search for all appointments based on user's id
+      appointments = await db.booking.findAll({
+        include: { model: db.user },
+        where: {
+          doctorId: userAuth.data.userId,
+        },
+      }); //cos the userAuth email is in an object when at login
+      if (!appointments) {
+        return res.status(404).json({ error: "appointments not found" });
+      }
+      // console.log("db.user: ", db.user);
+      console.log("appointments: ", appointments);
+      return res.json(appointments);
+    } catch (err) {
+      // return res.status(500).json({ error: "failed to get appointments" });
+      return res.status(500).json(err);
+    }
+  },
+
+  deleteAppointments: async (req, res) => {
+    const appointmentId = req.params.id; //take from FE link
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
+
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
+
+    console.log("appointmentId: ", appointmentId);
+
+    try {
+      const appointment = await db.booking.destroy({
+        where: {
+          id: appointmentId,
+        },
+      });
+      console.log("appointment: ", appointment);
+      return res.status(201).json("appointment deleted Successfully");
+    } catch (err) {
+      // return res.status(500).json({ error: "failed to delete appointment" });
+      return res.status(500).json(err);
     }
   },
 };
