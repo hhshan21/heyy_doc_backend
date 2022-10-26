@@ -27,8 +27,12 @@ router.patch("/bookings/:id", authMiddleware, bookingController.editBooking); //
 router.delete("/bookings/:id", authMiddleware, bookingController.deleteBooking); // returns 201
 
 //get,create, edit, delete each appointment (doctor only)
-// router.get('/appointments', authMiddleware, bookingController.listDoctorAppointments)//returns []
-// router.delete('/appointments/:appointment_id', authMiddleware, listingController.deleteListing)// return 201
+router.get("/appointments", authMiddleware, bookingController.showAppointments); //returns []
+router.delete(
+  "/appointments/:id",
+  authMiddleware,
+  bookingController.deleteAppointments
+); // return 201
 // router.post('/listing', authMiddleware, upload.any('files'), imageMethods.uploadImage, listingController.createListing)//return 201
 //  upload.array('file', 12),upload.single("file")validation(listingValidators.createListing)
 
