@@ -13,7 +13,10 @@ const bookingController = {
     try {
       // search for all bookings based on user's id
       bookings = await db.booking.findAll({
-        include: { model: db.user },
+        include: {
+          model: db.user,
+          attributes: ["firstName", "lastName", "imageUrl", "doctorInfo"],
+        },
         where: {
           patientId: userAuth.data.userId,
         },
@@ -54,7 +57,9 @@ const bookingController = {
   },
 
   editBooking: async (req, res) => {
-    // TO FIX THIS ROUTE
+    // TO FIX THIS ROUTE:
+    // Why edit is not updated in db?
+    // Need to check if bookingId exists?
     const bookingId = req.params.id; //take from FE link
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
@@ -111,7 +116,7 @@ const bookingController = {
       return res.status(401).json();
     }
 
-    console.log("userAuth: ", userAuth);
+    // console.log("userAuth: ", userAuth);
 
     try {
       // search for all appointments based on user's id
@@ -125,7 +130,7 @@ const bookingController = {
         return res.status(404).json({ error: "appointments not found" });
       }
       // console.log("db.user: ", db.user);
-      console.log("appointments: ", appointments);
+      // console.log("appointments: ", appointments);
       return res.json(appointments);
     } catch (err) {
       // return res.status(500).json({ error: "failed to get appointments" });
