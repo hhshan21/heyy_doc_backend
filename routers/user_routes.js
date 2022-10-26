@@ -1,6 +1,7 @@
 const express = require("express");
 const userController = require("../controllers/users/user_controller");
 const bookingController = require("../controllers/bookings/booking_controller");
+const doctorApptController = require("../controllers/doctor_appt/doc_appt_controller");
 const authMiddleware = require("../middlewares/authmiddleware");
 // const imageMethods = require("../middlewares/uploadImage/uploadImage");
 // const multer = require("multer");
@@ -27,11 +28,15 @@ router.patch("/bookings/:id", authMiddleware, bookingController.editBooking); //
 router.delete("/bookings/:id", authMiddleware, bookingController.deleteBooking); // returns 201
 
 //get,create, edit, delete each appointment (doctor only)
-router.get("/appointments", authMiddleware, bookingController.showAppointments); //returns []
+router.get(
+  "/appointments",
+  authMiddleware,
+  doctorApptController.showAppointments
+); //returns []
 router.delete(
   "/appointments/:id",
   authMiddleware,
-  bookingController.deleteAppointments
+  doctorApptController.deleteAppointments
 ); // return 201
 // router.post('/listing', authMiddleware, upload.any('files'), imageMethods.uploadImage, listingController.createListing)//return 201
 //  upload.array('file', 12),upload.single("file")validation(listingValidators.createListing)
