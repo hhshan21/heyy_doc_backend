@@ -24,8 +24,15 @@ const doc_appt_controller = {
       if (!appointments) {
         return res.status(404).json({ error: "appointment not found" });
       }
-      // console.log("db.user: ", db.user);
+      // patientInfo = await db.boking.findOne({
+
+      // })
       // console.log("appointments: ", appointments);
+      console.log("appointments: ", appointments[1].get().patientId);
+      appointments.forEach((ele) =>
+        console.log("patientId: ", ele.get().patientId)
+      );
+
       return res.json(appointments);
     } catch (err) {
       // return res.status(500).json({ error: "failed to get appointments" });

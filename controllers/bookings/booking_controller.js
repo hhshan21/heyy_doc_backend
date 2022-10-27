@@ -57,9 +57,7 @@ const bookingController = {
   },
 
   editBooking: async (req, res) => {
-    // TO FIX THIS ROUTE:
-    // Why edit is not updated in db?
-    // Need to check if bookingId exists?
+    // TO ADD check if bookingId exists and belongs to user?
     const bookingId = req.params.id; //take from FE link
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
@@ -67,10 +65,9 @@ const bookingController = {
     if (!userAuth) {
       return res.status(401).json();
     }
-    console.log("bookingId: ", bookingId);
 
     try {
-      await db.user.update(
+      await db.booking.update(
         { ...req.body },
         {
           where: {
