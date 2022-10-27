@@ -2,7 +2,6 @@ const db = require("../../models");
 
 const doc_appt_controller = {
   showAppointments: async (req, res) => {
-    // TO FIX THIS ROUTE to show patient info
     let appointments = null;
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
@@ -11,12 +10,14 @@ const doc_appt_controller = {
       return res.status(401).json();
     }
 
-    // console.log("userAuth: ", userAuth);
-
     try {
       // search for all appointments based on user's id
       appointments = await db.booking.findAll({
-        include: { model: db.user },
+        include: {
+          model: db.user,
+          as: "patient",
+          attributes: ["firstName", "lastName", "drugAllergies"],
+        },
         where: {
           doctorId: userAuth.data.userId,
         },
@@ -24,14 +25,6 @@ const doc_appt_controller = {
       if (!appointments) {
         return res.status(404).json({ error: "appointment not found" });
       }
-      // patientInfo = await db.boking.findOne({
-
-      // })
-      // console.log("appointments: ", appointments);
-      console.log("appointments: ", appointments[1].get().patientId);
-      appointments.forEach((ele) =>
-        console.log("patientId: ", ele.get().patientId)
-      );
 
       return res.json(appointments);
     } catch (err) {
