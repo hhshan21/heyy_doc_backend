@@ -1,21 +1,46 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-  // cookie is called token as defined in user_ctrller that's why req.cookies.token
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json("No token found");
+  // get Authentication header value
+  //e,g  Authorization: `Bearer ${token}`
+  //it will pass to the req routes
+  const authzHeader = req.header("Authorization");
+
+  if (!authzHeader) {
+    return res.status(401).json({
+      message: "Authentication details empty", //fe did not send the token back
+    });
   }
 
-  try {
-    // now have the cookie, will verify the token to obtain the verifiedData.
-    const verifiedData = jwt.verify(token, process.env.JWT_SECRET);
-    res.locals.userAuth = verifiedData;
-
-    return next();
-  } catch (err) {
-    return res.status(401).json("Invalid auth token");
+  // check for "Bearer "
+  if (authzHeader.slice(0, 7) !== "Bearer ") {
+    return res.status(401).json({
+      message: "Invalid auth type", //fe did not set the bearer token, set other type
+    });
   }
+
+  // get value after "Bearer ", the actual JWT token
+  const token = authzHeader.slice(7);
+  if (token.length === 0) {
+    return res.status(401).json({
+      message: "Invalid auth token", //token value from FE is empty
+    });
+  }
+
+  // set global var userAuth if JWT is valid
+  //check to see if it got tampered with by comparing secret and the token(encryption involves the token)
+  const verified = jwt.verify(token, process.env.JWT_SECRET);
+
+  if (verified) {
+    res.locals.userAuth = verified; //replace the userAuth or set it
+    console.log("res.locals.userAuth in middleware: ", res.locals.userAuth);
+    next();
+    return;
+  }
+
+  return res.status(401).json({
+    message: "Invalid auth token",
+  });
 };
 
 module.exports = authMiddleware;

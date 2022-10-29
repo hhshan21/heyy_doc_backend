@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post("/register", userController.register); // returns 201
 router.post("/login", userController.login); // returns 201
-router.post("/logout", userController.logout); // returns 201
+router.post("/logout", authMiddleware, userController.logout); // returns 201
 
 // add authMiddleware is used for any route that needs authentication
 // get and edit user's profile
