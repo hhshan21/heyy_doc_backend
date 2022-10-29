@@ -33,14 +33,13 @@ const bookingController = {
 
   createBooking: async (req, res) => {
     try {
-      const { patientId, doctorId, bookingAt, startAt, endAt } = req.body;
+      const { patientId, doctorId, bookingDate, bookingTime } = req.body;
       const [booking, created] = await db.booking.findOrCreate({
         where: {
           patientId,
           doctorId,
-          bookingAt,
-          startAt,
-          endAt,
+          bookingDate,
+          bookingTime,
         },
         defaults: {
           ...req.body,

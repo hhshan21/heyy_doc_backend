@@ -23,16 +23,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       patientId: DataTypes.INTEGER,
       doctorId: DataTypes.INTEGER,
-      bookingAt: {
+      bookingDate: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
-      startAt: {
-        type: DataTypes.TIME,
-        allowNull: false,
-      },
-      endAt: {
-        type: DataTypes.TIME,
+      bookingTime: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       symptoms: {
