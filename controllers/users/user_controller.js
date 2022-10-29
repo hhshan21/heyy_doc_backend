@@ -69,22 +69,26 @@ const userController = {
       },
       process.env.JWT_SECRET
     );
-    //go try in the jwt.io past ein encoded to see wad you get backk
+    //go try in the jwt.io past in encoded to see wad you get backk
     //get from post man cos it will res.json there it will an {}, token : encryptions
 
-    return res
-      .cookie("token", token, {
-        httpOnly: true,
-        // secure: process.env.NODE_ENV === "production",
-      })
-      .status(200)
-      .json({
-        message: "Logged in successfully",
-      });
+    return res.json({ token });
   },
 
   logout: async (req, res) => {
-    res.clearCookie("token");
+    let userAuth = res.locals.userAuth; //this is where the token is saved
+    console.log("token backend:", userAuth);
+
+    try {
+      //if token is not there, immediately logout
+      if (!userAuth) {
+        return res.status(404).json({ error: "token is not found" });
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(404).json({ err: "unable to logout" });
+    }
+
     res.status(200).json("Logout successful!");
   },
 
