@@ -15,16 +15,12 @@ module.exports = {
       doctorId: {
         type: Sequelize.INTEGER,
       },
-      bookingAt: {
+      bookingDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      startAt: {
-        type: Sequelize.TIME,
-        allowNull: false,
-      },
-      endAt: {
-        type: Sequelize.TIME,
+      bookingTime: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       symptoms: {
