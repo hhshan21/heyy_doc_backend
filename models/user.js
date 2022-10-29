@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       drugAllergies: {
-        type: DataTypes.JSONB,
+        type: DataTypes.STRING,
         allowNull: true,
         validate: {
           is: {
@@ -69,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       doctorInfo: {
         type: DataTypes.JSONB,
+        allowNull: true,
+      },
+      doctorTime: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },

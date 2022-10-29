@@ -45,15 +45,12 @@ module.exports = {
         allowNull: true,
       },
       drugAllergies: {
-        type: Sequelize.JSONB,
+        type: Sequelize.STRING,
         allowNull: true,
         validate: {
           is: {
             args: /^[A-Za-z,]/i,
           },
-          // is: {
-          //   args: /^[a-z]+$/i,
-          // },
         },
       },
       isDoctor: {
@@ -62,6 +59,10 @@ module.exports = {
       },
       doctorInfo: {
         type: Sequelize.JSONB,
+        allowNull: true,
+      },
+      doctorTime: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
       createdAt: {
