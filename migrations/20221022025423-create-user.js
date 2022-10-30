@@ -14,7 +14,6 @@ module.exports = {
         allowNull: false,
         validate: {
           len: 1,
-          isAlpha: true,
         },
       },
       lastName: {
@@ -22,7 +21,6 @@ module.exports = {
         allowNull: false,
         validate: {
           len: 2,
-          isAlpha: true,
         },
       },
       email: {
