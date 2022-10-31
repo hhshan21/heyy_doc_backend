@@ -139,6 +139,7 @@ const userController = {
       );
       return res.status(200).json("Profile edited");
     } catch (err) {
+      console.log("err: ", err);
       return res.status(500).json({ error: "failed to get user" });
     }
   },
