@@ -55,11 +55,11 @@ module.exports = (sequelize, DataTypes) => {
       drugAllergies: {
         type: DataTypes.STRING,
         allowNull: true,
-        validate: {
-          is: {
-            args: /^[A-Za-z,]/i,
-          },
-        },
+        // validate: {
+        //   is: {
+        //     args: /^[A-Za-z,]/i,
+        //   },
+        // },
       },
       isDoctor: {
         type: DataTypes.BOOLEAN,

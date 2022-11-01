@@ -29,6 +29,7 @@ const bookingController = {
         where: {
           patientId: userAuth.data.userId,
         },
+        order: [["bookingDate", "DESC"]],
       }); //cos the userAuth email is in an object when at login
       if (!bookings) {
         return res.status(404).json({ error: "bookings not found" });
