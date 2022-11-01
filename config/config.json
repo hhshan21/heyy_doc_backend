@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "heyy_doc_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "heyy_doc_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "heyy_doc_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

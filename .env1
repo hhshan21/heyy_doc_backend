@@ -1,0 +1,16 @@
+// require("dotenv").config();
+
+// module.exports = {
+//   database: process.env.DB_NAME,
+//   host: process.env.DB_HOST,
+//   dialect: process.env.DB_DIALECT,
+//   username: process.env.DB_USERNAME,
+//   password: process.env.DB_PASSWORD,
+// };
+
+// inside .env
+// DB_NAME=rxgliyrp
+// DB_HOST=tiny.db.elephantsql.com
+// DB_DIALECT=postgresql
+// DB_USERNAME=rxgliyrp
+// DB_PASSWORD=yUg8JydZMD5yOsbA4_MLxDmV1z7A0ud3
