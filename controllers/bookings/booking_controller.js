@@ -50,6 +50,7 @@ const bookingController = {
           doctorId,
           bookingDate,
           bookingTime,
+          symptoms,
         },
         defaults: {
           ...req.body,

@@ -60,6 +60,7 @@ const userController = {
     const userData = {
       userId: user.id,
       email: user.email,
+      isDoctor: user.isDoctor,
     };
 
     //gnerate the token, that will pass to FE, afte the login req then set in local with this token
@@ -74,7 +75,13 @@ const userController = {
     //go try in the jwt.io past in encoded to see wad you get backk
     //get from post man cos it will res.json there it will an {}, token : encryptions
 
-    return res.json({ token });
+    return res.json({
+      token,
+      user: {
+        isDoctor: user.isDoctor,
+        email: user.email,
+      },
+    });
   },
 
   logout: async (req, res) => {
