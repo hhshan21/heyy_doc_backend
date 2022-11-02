@@ -80,6 +80,7 @@ const userController = {
       user: {
         isDoctor: user.isDoctor,
         email: user.email,
+        userId: user.id,
       },
     });
   },
