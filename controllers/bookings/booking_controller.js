@@ -44,7 +44,8 @@ const bookingController = {
 
   createBooking: async (req, res) => {
     try {
-      const { patientId, doctorId, bookingDate, bookingTime } = req.body;
+      const { patientId, doctorId, bookingDate, bookingTime, symptoms } =
+        req.body;
       const [booking, created] = await db.booking.findOrCreate({
         where: {
           patientId,
@@ -63,6 +64,7 @@ const bookingController = {
         return res.status(201).json("Booking already exists");
       }
     } catch (err) {
+      console.log("err: ", err);
       return res.status(500).json({ err: "Failed to create new booking" });
     }
   },

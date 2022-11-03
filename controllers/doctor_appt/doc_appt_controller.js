@@ -16,7 +16,13 @@ const doc_appt_controller = {
         include: {
           model: db.user,
           as: "patient",
-          attributes: ["firstName", "lastName", "drugAllergies"],
+          attributes: [
+            "firstName",
+            "lastName",
+            "email",
+            "drugAllergies",
+            "imageUrl",
+          ],
         },
         where: {
           doctorId: userAuth.data.userId,
