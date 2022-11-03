@@ -21,6 +21,7 @@ const doc_appt_controller = {
         where: {
           doctorId: userAuth.data.userId,
         },
+        order: [["bookingDate", "DESC"]],
       }); //cos the userAuth email is in an object when at login
       if (!appointments) {
         return res.status(404).json({ error: "appointment not found" });
