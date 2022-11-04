@@ -1,11 +1,11 @@
 const db = require("../../models");
 
 const bookingController = {
-  showBooking: async (req, res) => {
+  showBookings: async (req, res) => {
     let bookings = null;
     let userAuth = res.locals.userAuth; // this is where user is authenticated
 
-    console.log("userAuth in showBooking: ", userAuth);
+    console.log("userAuth in showBookings: ", userAuth);
 
     //this is redundant, security, defence indepth
     if (!userAuth) {
@@ -37,6 +37,47 @@ const bookingController = {
       }
 
       return res.json({ bookings });
+    } catch (err) {
+      return res.status(500).json({ error: "failed to get booking" });
+    }
+  },
+
+  showBooking: async (req, res) => {
+    let booking = null;
+    let userAuth = res.locals.userAuth; // this is where user is authenticated
+
+    console.log("userAuth in showBooking: ", userAuth);
+    const bookingId = req.params.id;
+
+    //this is redundant, security, defence indepth
+    if (!userAuth) {
+      return res.status(401).json();
+    }
+    try {
+      // search for all bookings based on user's id
+      booking = await db.booking.findOne({
+        include: [
+          {
+            model: db.user,
+            as: "patient",
+            attributes: ["firstName", "lastName", "imageUrl", "doctorInfo"],
+          },
+          {
+            model: db.user,
+            as: "doctor",
+            attributes: ["firstName", "lastName", "imageUrl", "doctorInfo"],
+          },
+        ],
+        where: {
+          id: bookingId,
+        },
+      }); //cos the userAuth email is in an object when at login
+
+      if (!booking) {
+        return res.status(404).json({ error: "no booking result!" });
+      }
+
+      return res.json({ booking });
     } catch (err) {
       return res.status(500).json({ error: "failed to get booking" });
     }
